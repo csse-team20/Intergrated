@@ -22,12 +22,14 @@ public class UserDemo {
         obj.put("tfirstName", "Sman");
         obj.put("tlastName","tab");
         obj.put("taddress","abc");
-       // obj.put("tnic","930102140v");
+        obj.put("tnic","930102140v");
         obj.put("temail","sumal@gmail.com");
         obj.put("tphone","0772145846");
         obj.put("tType","Doctor");
         obj.put("tImage","Sanjeewa/Desktop/images.jpg");
         return obj;
+        
+        //new 
         
         
     }
