@@ -74,7 +74,7 @@ public class AddTest {
         
         UserDemo ud = new UserDemo();
         
-        TestData tu = new TestData();
+        TestDataUser tu = new TestDataUser();
         
         JSONObject expObj = tu.getUsers();
         

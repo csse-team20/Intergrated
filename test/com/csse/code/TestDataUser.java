@@ -15,7 +15,7 @@ import org.json.JSONObject;
  *
  * @author Anuradha Sanjeewa
  */
-public class TestData {
+public class TestDataUser {
     
      public JSONObject getUsers() throws JSONException, SQLException{
          
