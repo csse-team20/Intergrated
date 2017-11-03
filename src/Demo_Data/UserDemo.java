@@ -5,6 +5,7 @@
  */
 package Demo_Data;
 
+import javax.swing.JTextField;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,10 +15,10 @@ import org.json.JSONObject;
  */
 public class UserDemo {
     
-     JSONObject obj = new JSONObject();
+     
     
     public JSONObject addUsers() throws JSONException{
-    
+        JSONObject obj = new JSONObject();
        
         obj.put("tfirstName", "Sman");
         obj.put("tlastName","tab");
@@ -33,6 +34,39 @@ public class UserDemo {
 //        new cmment
         
         
+    }
+    
+    
+    public JSONObject regiterUsers() throws JSONException{
+        
+        JSONObject obj = new JSONObject();
+       
+        obj.put("tnic", "950102144v");
+        obj.put("tuserName","Anuradha");
+        obj.put("tPassword","123456");
+        obj.put("tsecQuestion","nurse");
+        obj.put("tanswer","123");
+        
+        
+        return obj;
+              
+    }
+    
+    
+    
+    public JSONObject addEmpLeaves() throws JSONException{
+        
+        JSONObject obj = new JSONObject();
+       
+        obj.put("txtEmpID", "1");
+        obj.put("txtEmpName","Anuradha");
+        obj.put("txtAnuLeave","14");
+        obj.put("txtCasuLeave","7");
+        obj.put("txtMediLeave","7");
+        
+        
+        return obj;
+              
     }
     
 }

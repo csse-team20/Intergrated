@@ -353,7 +353,7 @@ public class Manage_Lab_Test extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "You Should Fill All Fields");
         } else {
             lab_test_management a = new lab_test_management();
-            a.addLabTest(ttestCode, ttestsName, ttestType, tdiscrption,chemicals);
+            a.addLabTest(ttestCode, ttestsName, ttestType, tdiscrption);
             a.addLabTestChemecal(ttestCode, chemicals);
            /* try {
 

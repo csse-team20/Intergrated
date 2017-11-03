@@ -9,6 +9,7 @@ import com.csse.db.Dbaccess;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,7 +49,9 @@ public class Update {
                     + "	(`ID` = '" + id + "')\n"
                     + "AND (`NIC` = '" + nic + "');";
 
-            da.insertData(query);
+             da.insertData(query);
+            
+            JOptionPane.showMessageDialog(jFileChooser1,"Data Updated Succesfuly");
 
        
     }

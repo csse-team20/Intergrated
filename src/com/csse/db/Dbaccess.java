@@ -40,7 +40,7 @@ public class Dbaccess {
             Statement s = conn.prepareStatement(query);
 
             result = s.executeQuery(query);
-            System.out.println(result);
+            //System.out.println(result);
            // conn.close();
         } catch (SQLException | ClassNotFoundException ex) {
            Logger.getLogger(Dbaccess.class.getName()).log(Level.SEVERE, null, ex);

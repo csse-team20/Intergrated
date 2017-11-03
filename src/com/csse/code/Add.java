@@ -10,6 +10,7 @@ import com.csse.validation.RegisterValidation;
 import com.csse.validation.UsersValidation;
 import com.toedter.calendar.JDateChooser;
 import java.io.File;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -70,7 +71,7 @@ public class Add {
 
             da.insertData(query);
 
-            JOptionPane.showMessageDialog(jFileChooser1, "Data inserted");
+            JOptionPane.showMessageDialog(jFileChooser1, "Data Saved Successfuly");
             //  JOptionPane.showMessageDialog(jFileChooser1,"Data Saved to users table");
         }
         }
@@ -92,6 +93,7 @@ public class Add {
                 + "	('" + empId + "', '" + paymentFee + "','" + noOfDays + "', '" + salary + "', '" + bonus + "', '" + year + "' );";
         Dbaccess da = new Dbaccess();
         da.insertData(query);
+        JOptionPane.showMessageDialog(txtPayment,"Data Saved Succesfuly");
 
     }
 
@@ -155,10 +157,10 @@ public class Add {
                 + "	(`EMP_ID` = '" + empId + "') AND (`DATE` = '" + year + "');";
 
         da.insertData(queryAttendance);
+        JOptionPane.showMessageDialog(txtEmpName,"Data Saved Successfuly");
     }
 
     public void register(JTextField txtNic, JTextField txtUserName, JTextField txtPassword, JTextField txtSecQuestion, JTextField txtAnswer) {
-        
         
         String nic = txtNic.getText();
         String userName = txtUserName.getText();
@@ -192,6 +194,8 @@ public class Add {
             Dbaccess da = new Dbaccess();
             
             da.insertData(query);
+            
+            JOptionPane.showMessageDialog(txtAnswer,"Data Saved Succesfuly");
         } 
     }
 }

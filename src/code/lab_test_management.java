@@ -21,7 +21,7 @@ public class lab_test_management {
     PreparedStatement p = null;
     ResultSet rs = null;
 
-    public void addLabTest(String ttestCode, String ttestsName, String ttestType, String tdiscrption, String chemical[]) {
+    public void addLabTest(String ttestCode, String ttestsName, String ttestType, String tdiscrption) {
 
         c = DBconnection.getConnection();
 

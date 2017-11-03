@@ -61,5 +61,101 @@ public class TestDataUser {
      
     }
     
-    
+     
+     public JSONObject getRegisteredUsers() throws JSONException, SQLException{
+         
+         
+         JSONObject jsonObject = new JSONObject();
+        
+        
+            Dbaccess da = new Dbaccess();
+            ResultSet rs;
+            String tnic = null;
+            String tuserName = null;
+            String tPassword = null;
+            String tsecQuestion = null;
+            String tanswer = null;
+            String query = "SELECT\n" +
+                            "	login.ID,\n" +
+                            "	login.NIC,\n" +
+                            "	login.USER_NAME,\n" +
+                            "	login.`PASSWORD`,\n" +
+                            "	login.SEC_QUESTION,\n" +
+                            "	login.ANSWER \n" +
+                            "FROM\n" +
+                            "	login \n" +
+                            "WHERE\n" +
+                            "	login.NIC = '950102144v'";
+            rs = da.getData(query);
+            
+            while(rs.next()){
+                
+                tnic = rs.getString("NIC");
+                
+                tuserName = rs.getString("USER_NAME");
+                tPassword = rs.getString("PASSWORD");
+                tsecQuestion = rs.getString("SEC_QUESTION");
+                tanswer = rs.getString("ANSWER");
+                
+            }
+                 jsonObject.put("tnic", tnic);
+                 jsonObject.put("tuserName", tuserName);
+                 jsonObject.put("tPassword", tPassword);
+                 jsonObject.put("tsecQuestion", tsecQuestion);
+                 jsonObject.put("tanswer", tanswer);
+            
+                 System.out.println("data "+jsonObject.toString());
+                 return jsonObject;
+      
+        
+     
+    }
+     public JSONObject getEmpLeaves() throws JSONException, SQLException{
+         
+         
+         JSONObject jsonObject = new JSONObject();
+        
+        
+            Dbaccess da = new Dbaccess();
+            ResultSet rs;
+            String tnic = null;
+            String tuserName = null;
+            String tPassword = null;
+            String tsecQuestion = null;
+            String tanswer = null;
+            String query = "SELECT\n" +
+                            "	login.ID,\n" +
+                            "	login.NIC,\n" +
+                            "	login.USER_NAME,\n" +
+                            "	login.`PASSWORD`,\n" +
+                            "	login.SEC_QUESTION,\n" +
+                            "	login.ANSWER \n" +
+                            "FROM\n" +
+                            "	login \n" +
+                            "WHERE\n" +
+                            "	login.NIC = '950102144v'";
+            rs = da.getData(query);
+            
+            while(rs.next()){
+                
+                tnic = rs.getString("NIC");
+                
+                tuserName = rs.getString("USER_NAME");
+                tPassword = rs.getString("PASSWORD");
+                tsecQuestion = rs.getString("SEC_QUESTION");
+                tanswer = rs.getString("ANSWER");
+                
+            }
+                 jsonObject.put("tnic", tnic);
+                 jsonObject.put("tuserName", tuserName);
+                 jsonObject.put("tPassword", tPassword);
+                 jsonObject.put("tsecQuestion", tsecQuestion);
+                 jsonObject.put("tanswer", tanswer);
+            
+                 System.out.println("data "+jsonObject.toString());
+                 return jsonObject;
+      
+        
+     
+    }
 }

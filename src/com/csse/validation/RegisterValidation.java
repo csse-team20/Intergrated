@@ -35,14 +35,22 @@ public class RegisterValidation {
             
             ResultSet rs;
 
+//            String query = "SELECT\n" +
+//                            "	users.NIC,\n" +
+//                            "	users.FIRST_NAME,\n" +
+//                            "	users.ID \n" +
+//                            "FROM\n" +
+//                            "	users \n" +
+//                            "WHERE\n" +
+//                            "	users.NIC = '"+nic+"'" ;
             String query = "SELECT\n" +
-                            "	users.NIC,\n" +
-                            "	users.FIRST_NAME,\n" +
-                            "	users.ID \n" +
+                            "	login.NIC,\n" +
+                            "	login.USER_NAME,\n" +
+                            "	login.`PASSWORD` \n" +
                             "FROM\n" +
-                            "	users \n" +
+                            "	login \n" +
                             "WHERE\n" +
-                            "	users.NIC = '"+nic+"'" ;
+                            "	login.NIC = '"+nic+"'";
             rs = da.getData(query);
             
             while(rs.next()){

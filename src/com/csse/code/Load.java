@@ -291,11 +291,12 @@ public class Load {
     public void loadEmpDetails(JTextField txtEmpID, JTextField txtEmpName, JTextField txtAnuLeave, JTextField txtCasuLeave, JTextField txtMediLeave) {
 
         try {
-            Dbaccess da = new Dbaccess();
+             ResultSet rs;
+            
             String empId = txtEmpID.getText();
 
-            ResultSet rs;
-
+           
+            Dbaccess da = new Dbaccess();
             String query = "SELECT\n"
                     + "	`leave`.EMP_ID,\n"
                     + "	`leave`.EMP_NAME,\n"
