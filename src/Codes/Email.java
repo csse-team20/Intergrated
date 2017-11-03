@@ -1,16 +1,21 @@
 
 package Codes;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
+import java.sql.Connection;
 import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
+import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JInternalFrame;
 
 
 
@@ -38,7 +43,7 @@ public class Email {
                 message.setSubject(subj);
                 message.setText(mzg);
                 Transport.send(message);
-                JOptionPane.showMessageDialog(null, "Email Sent");
+                JOptionPane.showMessageDialog(null, "Email Successfully Sent");
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);

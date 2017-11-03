@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.csse.Patient_Management;
+package Patient_Management;
       
 /**
  *
@@ -33,6 +33,7 @@ public class Main_J extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,6 +83,13 @@ public class Main_J extends javax.swing.JFrame {
             }
         });
 
+        jButton7.setText("Approve Drugs");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,7 +105,9 @@ public class Main_J extends javax.swing.JFrame {
                 .addComponent(jButton3)
                 .addGap(63, 63, 63)
                 .addComponent(jButton5)
-                .addContainerGap(694, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
+                .addComponent(jButton7)
+                .addContainerGap(539, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPane)
@@ -112,7 +122,8 @@ public class Main_J extends javax.swing.JFrame {
                     .addComponent(jButton3)
                     .addComponent(jButton5)
                     .addComponent(jButton6)
-                    .addComponent(jButton4))
+                    .addComponent(jButton4)
+                    .addComponent(jButton7))
                 .addGap(18, 18, 18)
                 .addComponent(jPane)
                 .addContainerGap())
@@ -151,6 +162,12 @@ public class Main_J extends javax.swing.JFrame {
         Diagnosis diag = new Diagnosis();
         jPane.add(diag).setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        jPane.removeAll();
+        Approve_Drugs app = new Approve_Drugs();
+        jPane.add(app).setVisible(true);     
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -193,6 +210,7 @@ public class Main_J extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JDesktopPane jPane;
     // End of variables declaration//GEN-END:variables
 }

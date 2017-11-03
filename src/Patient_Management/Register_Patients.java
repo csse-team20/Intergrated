@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.csse.Patient_Management;
+package Patient_Management;
 
 import Codes.DBconnection;
 import Codes.IncrementId;
@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
@@ -30,6 +31,7 @@ public class Register_Patients extends javax.swing.JInternalFrame {
     Connection c = null;
     PreparedStatement p = null;
     ResultSet rs = null;
+    
     String pPid = null;
     String pFName = null;
     String pLName = null;
@@ -84,7 +86,7 @@ public class Register_Patients extends javax.swing.JInternalFrame {
         txtAddress.setText("");
         txtContact.setText("");
         txtNic.setText("");
-        jComCat.setSelectedItem("");
+        jComCat.setSelectedItem("--");
     }
 
     /**
@@ -131,6 +133,7 @@ public class Register_Patients extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         txtDte = new javax.swing.JLabel();
         txtReg = new javax.swing.JLabel();
+        Reset = new javax.swing.JButton();
 
         setTitle("Register Patients");
 
@@ -199,7 +202,7 @@ public class Register_Patients extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Registration ID", "First Name", "Last Name", "Age", "Address", "Nic", "Catecory", "Registered Date"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -227,7 +230,7 @@ public class Register_Patients extends javax.swing.JInternalFrame {
             }
         });
 
-        jComCat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Critical", "Non- Critical" }));
+        jComCat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--", "Critical", "Non- Critical" }));
         jComCat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComCatActionPerformed(evt);
@@ -241,7 +244,7 @@ public class Register_Patients extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Registration ID", "First Name", "Last Name", "Age", "Address", "Nic", "Catecory", "Registered Date"
             }
         ));
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -254,6 +257,13 @@ public class Register_Patients extends javax.swing.JInternalFrame {
         jLabel15.setText("Catecory");
 
         jLabel16.setText("Date");
+
+        Reset.setText("Reset");
+        Reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -274,48 +284,45 @@ public class Register_Patients extends javax.swing.JInternalFrame {
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(155, 155, 155)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton4)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(RadioM)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(RadioF))
+                            .addComponent(txtLname, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAge, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtContact, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNic, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComCat, javax.swing.GroupLayout.Alignment.LEADING, 0, 151, Short.MAX_VALUE)
+                            .addComponent(txtFname, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                            .addComponent(txtReg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtDte, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(117, 117, 117)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(RadioM)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(RadioF))
-                                .addComponent(txtLname, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtAge, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtContact, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtNic, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jComCat, javax.swing.GroupLayout.Alignment.LEADING, 0, 151, Short.MAX_VALUE)
-                                .addComponent(txtFname, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                                .addComponent(txtReg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtDte, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(213, 213, 213)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel9)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(69, 69, 69)
-                                            .addComponent(txtRegNo2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(56, 56, 56)
-                                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(117, 117, 117)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGap(117, 117, 117)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton1)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton3))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(85, 85, 85)
+                                    .addComponent(txtRegNo2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(61, 61, 61)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(50, 50, 50)
+                                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel9)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4)
+                        .addGap(35, 35, 35)
+                        .addComponent(Reset)))
+                .addContainerGap(53, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -326,22 +333,23 @@ public class Register_Patients extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtRegNo2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(49, 49, 49)
+                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtReg, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtRegNo2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -387,20 +395,20 @@ public class Register_Patients extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDte, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
-                            .addComponent(jButton3))
-                        .addGap(36, 36, 36))
+                            .addComponent(jButton3)
+                            .addComponent(jButton4)
+                            .addComponent(Reset))
+                        .addContainerGap(53, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(66, 66, 66)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(15, 15, 15)
-                        .addComponent(jButton4)
-                        .addGap(10, 10, 10)
+                        .addGap(48, 48, 48)
                         .addComponent(jLabel3)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -432,6 +440,11 @@ public class Register_Patients extends javax.swing.JInternalFrame {
         pNic = txtNic.getText();
         pCat = jComCat.getSelectedItem().toString();
         pDate = txtDte.getText();
+        
+        //Contact No validation
+        //String number = "012-1234567"; 
+        Pattern pattern = Pattern.compile("\\d{3}-\\d{7}");
+        Matcher matcher = pattern.matcher(pContact); 
         
          if(txtFname.equals(""))
          {  txtFname.setEditable(true);
@@ -472,12 +485,18 @@ public class Register_Patients extends javax.swing.JInternalFrame {
              JOptionPane.showMessageDialog(null, "Age must be a number", "ERROR", JOptionPane.ERROR_MESSAGE);  
              txtAge.setEditable(true);
              txtAge.setBorder(border);
-         }
-         else if(!(amounts.matcher(txtContact.getText()).matches()) ){
-             JOptionPane.showMessageDialog(null, "Please Enter a valid data", "ERROR", JOptionPane.ERROR_MESSAGE);  
-             txtContact.setEditable(true);
-             txtContact.setBorder(border);
-         }
+          }
+         else if(!(txtNic.getText().trim().matches("^[0-9]{9}[vVxX]$"))){
+             JOptionPane.showMessageDialog(null,"Invalid NIC","ERROR", JOptionPane.ERROR_MESSAGE);
+             txtNic.setEditable(true);
+             txtNic.setBorder(border);
+        }   
+         else if(!(matcher.matches())) {
+              JOptionPane.showMessageDialog(null,"Invalid Phone No","ERROR", JOptionPane.ERROR_MESSAGE);
+              txtContact.setEditable(true);
+              txtContact.setBorder(border);
+          }
+          
       /*   else if(!(txtwid.getText().startsWith("WRN")))
          {
          txtwid.setEditable(true);
@@ -517,8 +536,7 @@ public class Register_Patients extends javax.swing.JInternalFrame {
              pSave.save(pPid, pFName, pLName, pAge, pGender, pAddress, pContact, pNic, pCat, pDate);
             
              tableLoad();
-             clearFields();
-                
+             clearFields();               
          }  
       }
 
@@ -557,7 +575,7 @@ public class Register_Patients extends javax.swing.JInternalFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
        String pPid = txtReg.getText();
-        int x = JOptionPane.showConfirmDialog(this, "Do You Want to delete the record");
+        int x = JOptionPane.showConfirmDialog(this, "Do You Want to delete the registered patient record");
 
         if (x == 0) {
 
@@ -607,6 +625,8 @@ public class Register_Patients extends javax.swing.JInternalFrame {
          pNic = txtNic.getText();
          pCat = jComCat.getSelectedItem().toString();
         
+         Pattern pattern = Pattern.compile("\\d{3}-\\d{7}");
+         Matcher matcher = pattern.matcher(pContact); 
         
          if(txtFname.equals(""))
          {  txtFname.setEditable(true);
@@ -642,12 +662,18 @@ public class Register_Patients extends javax.swing.JInternalFrame {
          {  jComCat.setEditable(true);
          jComCat.setBorder(border);
          JOptionPane.showMessageDialog(null, "Enter Status", "ERROR", JOptionPane.ERROR_MESSAGE);
-         }
-         else if(!(amounts.matcher(txtContact.getText()).matches()) ){
-         JOptionPane.showMessageDialog(null, "Please Enter a valid data", "ERROR", JOptionPane.ERROR_MESSAGE);  
-         txtContact.setEditable(true);
-         txtContact.setBorder(border);
-         }
+          }
+         
+         else if(!(txtNic.getText().trim().matches("^[0-9]{9}[vVxX]$"))){
+         JOptionPane.showMessageDialog(null,"Invalid NIC","ERROR", JOptionPane.ERROR_MESSAGE);
+         txtNic.setEditable(true);
+         txtNic.setBorder(border);
+         } 
+         else if(!(matcher.matches())) {
+            JOptionPane.showMessageDialog(null,"Invalid Phone No","ERROR", JOptionPane.ERROR_MESSAGE);
+            txtContact.setEditable(true);
+            txtContact.setBorder(border);
+          }
         /*   else if(!(txtwid.getText().startsWith("WRN")))
          {
          txtwid.setEditable(true);
@@ -693,10 +719,15 @@ public class Register_Patients extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetActionPerformed
+        clearFields();
+    }//GEN-LAST:event_ResetActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton RadioF;
     private javax.swing.JRadioButton RadioM;
+    private javax.swing.JButton Reset;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

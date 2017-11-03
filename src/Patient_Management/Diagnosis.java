@@ -3,16 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.csse.Patient_Management;
+package Patient_Management;
 
 import Codes.DBconnection;
 import Codes.Diagnosis_Data;
 import Codes.IncrementId;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -30,6 +34,10 @@ public class Diagnosis extends javax.swing.JInternalFrame {
     String pGeneral = null;
     String pSystemic = null;
     String pDiagnosis = null;
+    
+    Pattern amounts = Pattern.compile("\\d{2,20}");
+    Border border = (BorderFactory.createLineBorder(Color.red));
+    Border border1 = (BorderFactory.createLineBorder(Color.blue));
    
     
     public Diagnosis() {
@@ -116,7 +124,9 @@ public class Diagnosis extends javax.swing.JInternalFrame {
         jLabel16 = new javax.swing.JLabel();
         txtDiag = new javax.swing.JTextField();
 
-        jLabel1.setText("Patient NIC");
+        setTitle("Diagnosis Details");
+
+        jLabel1.setText("Patient Name");
 
         txtID.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -176,7 +186,7 @@ public class Diagnosis extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Patient ID", "First Name", "Last Name", "Age"
+                "Diagnosis ID", "Diagnosis", "Patient ID", "Patient Name", "Age", "Signs And Symptoms", "nullGeneral Findings", "Systemic Findings"
             }
         ));
         tbldiag.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -201,14 +211,6 @@ public class Diagnosis extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(37, 37, 37)
-                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,11 +251,25 @@ public class Diagnosis extends javax.swing.JInternalFrame {
                                                 .addComponent(txtSys, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(txtGen, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addComponent(txtDiag, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(73, 73, 73)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(73, 73, 73)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(52, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,7 +328,7 @@ public class Diagnosis extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDiag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton2))
@@ -323,8 +339,43 @@ public class Diagnosis extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         
+        if(txtSigns.equals(""))
+         {  txtSigns.setEditable(true);
+            txtSigns.setBorder(border);
+            JOptionPane.showMessageDialog(null, "Enter Signs & Symptoms", "ERROR", JOptionPane.ERROR_MESSAGE);
+         }    
+         if(txtGen.equals(""))
+         {  txtGen.setEditable(true);
+            txtGen.setBorder(border);
+            JOptionPane.showMessageDialog(null, "Enter Genearal Findings", "ERROR", JOptionPane.ERROR_MESSAGE);
+         }    
+         if(txtSys.equals(""))
+         {  txtSys.setEditable(true);
+            txtSys.setBorder(border);
+            JOptionPane.showMessageDialog(null, "Enter Systemic Findings", "ERROR", JOptionPane.ERROR_MESSAGE);
+         }   
+         if(txtDiag.equals(""))
+         {  txtDiag.setEditable(true);
+            txtDiag.setBorder(border);
+            JOptionPane.showMessageDialog(null, "Enter the disease", "ERROR", JOptionPane.ERROR_MESSAGE);
+         }    
         
-        int x = JOptionPane.showConfirmDialog(rootPane, "Do you want to Add this ?");
+         else{
+             
+         txtSigns.setEditable(true);
+         txtSigns.setBorder(border1);
+            
+         txtGen.setEditable(true);
+         txtGen.setBorder(border1);
+            
+         txtSys.setEditable(true);
+         txtSys.setBorder(border1);
+            
+         txtDiag.setEditable(true);
+         txtDiag.setBorder(border1);
+         
+        int x = JOptionPane.showConfirmDialog(rootPane, "Do you want to Add the diagnosis details of the patient ?");
 
         if (x == 0) {
             
@@ -346,9 +397,46 @@ public class Diagnosis extends javax.swing.JInternalFrame {
                 d_clearFields();            
          }  
         } 
+      }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        if(txtSigns.equals(""))
+         {  txtSigns.setEditable(true);
+            txtSigns.setBorder(border);
+            JOptionPane.showMessageDialog(null, "Enter Signs & Symptoms", "ERROR", JOptionPane.ERROR_MESSAGE);
+         }    
+         if(txtGen.equals(""))
+         {  txtGen.setEditable(true);
+            txtGen.setBorder(border);
+            JOptionPane.showMessageDialog(null, "Enter Genearal Findings", "ERROR", JOptionPane.ERROR_MESSAGE);
+         }    
+         if(txtSys.equals(""))
+         {  txtSys.setEditable(true);
+            txtSys.setBorder(border);
+            JOptionPane.showMessageDialog(null, "Enter Systemic Findings", "ERROR", JOptionPane.ERROR_MESSAGE);
+         }   
+         if(txtDiag.equals(""))
+         {  txtDiag.setEditable(true);
+            txtDiag.setBorder(border);
+            JOptionPane.showMessageDialog(null, "Enter the disease", "ERROR", JOptionPane.ERROR_MESSAGE);
+         }    
+        
+         else{
+             
+         txtSigns.setEditable(true);
+         txtSigns.setBorder(border1);
+            
+         txtGen.setEditable(true);
+         txtGen.setBorder(border1);
+            
+         txtSys.setEditable(true);
+         txtSys.setBorder(border1);
+            
+         txtDiag.setEditable(true);
+         txtDiag.setBorder(border1);
+         
         int ans = JOptionPane.showConfirmDialog(null, "Do you need to update the diagnosis details of the patient?");
 
         if (ans == 0) {
@@ -366,7 +454,7 @@ public class Diagnosis extends javax.swing.JInternalFrame {
                 d_tableLoad();
                 d_clearFields();
         }        
-        
+      }  
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void txtIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyReleased
