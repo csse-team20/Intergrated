@@ -180,6 +180,7 @@ public class Order_Chemical extends javax.swing.JInternalFrame {
         AddButton = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
 
+        setTitle("Make Chemical Order");
         setPreferredSize(new java.awt.Dimension(1366, 550));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

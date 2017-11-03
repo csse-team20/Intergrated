@@ -62,6 +62,7 @@ public class Search_Patient_Lab_Test extends javax.swing.JInternalFrame {
         cmbSearch = new javax.swing.JComboBox<>();
         txtSearch = new javax.swing.JTextField();
 
+        setTitle("Search Patient Lab Test");
         setPreferredSize(new java.awt.Dimension(1366, 550));
 
         AllDataTable.setModel(new javax.swing.table.DefaultTableModel(

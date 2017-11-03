@@ -56,7 +56,7 @@ public class manage_chemical extends javax.swing.JInternalFrame {
 
         try {
 
-            String sql1 = "SELECT c.chemCode as 'Chemical Code',c.chemName as 'Chemical Name',c.type as 'Type',c.qty as 'Weight/Concenration',c.supId as 'Supplier ID' "
+            String sql1 = "SELECT c.chemCode as 'Chemical Code',c.chemName as 'Chemical Name',c.type as 'Type',c.qty as 'Weight/Concenration',c.supId as 'Supplier ID',c.price as 'Price' "
                     + "FROM chemical c WHERE c.status = 'NT'";
             p = c.prepareStatement(sql1);
             rs = p.executeQuery();
@@ -74,6 +74,7 @@ public class manage_chemical extends javax.swing.JInternalFrame {
         txtConcentration.setText("");
         txtWeight.setText("");
         cmbChemType.setSelectedIndex(0);
+        txtPrice.setText("0.0");
     }
 
     /**
@@ -101,6 +102,8 @@ public class manage_chemical extends javax.swing.JInternalFrame {
         txtConcentration = new javax.swing.JTextField();
         txtWeight = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtPrice = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         txtSname = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -112,23 +115,24 @@ public class manage_chemical extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
 
+        setTitle("Manage Chemical ");
         setPreferredSize(new java.awt.Dimension(1366, 550));
 
         tblChemicalDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Chemical Code", "Chemical Name", "Type", "Weight / Concentration", "Supplier ID"
+                "Chemical Code", "Chemical Name", "Type", "Weight / Concentration", "Supplier ID", "Price"
             }
         ));
         tblChemicalDetails.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -185,6 +189,14 @@ public class manage_chemical extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Chemical Code");
 
+        jLabel9.setText("Price");
+
+        txtPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPriceActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -196,15 +208,16 @@ public class manage_chemical extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblChemCode)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtChemName)
-                        .addComponent(cmbChemType, 0, 116, Short.MAX_VALUE)
-                        .addComponent(txtConcentration)
-                        .addComponent(txtWeight)))
+                    .addComponent(txtChemName)
+                    .addComponent(cmbChemType, 0, 116, Short.MAX_VALUE)
+                    .addComponent(txtConcentration)
+                    .addComponent(txtWeight)
+                    .addComponent(txtPrice))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -230,7 +243,11 @@ public class manage_chemical extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Serach Supplier By Name Or ID"));
@@ -300,6 +317,22 @@ public class manage_chemical extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(108, 108, 108)
+                                .addComponent(lblSid, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(92, 92, 92)
+                                .addComponent(lblSname, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(85, 85, 85)
+                                .addComponent(lblBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -317,23 +350,7 @@ public class manage_chemical extends javax.swing.JInternalFrame {
                                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 991, Short.MAX_VALUE))
-                                .addContainerGap())))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(108, 108, 108)
-                                .addComponent(lblSid, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(92, 92, 92)
-                                .addComponent(lblSname, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(85, 85, 85)
-                                .addComponent(lblBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addContainerGap())))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,7 +384,7 @@ public class manage_chemical extends javax.swing.JInternalFrame {
                             .addComponent(jButton2)
                             .addComponent(jButton1)))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56))
+                .addGap(37, 37, 37))
         );
 
         pack();
@@ -381,22 +398,23 @@ public class manage_chemical extends javax.swing.JInternalFrame {
         String tcon = txtConcentration.getText();
         String tweight = txtWeight.getText();
         String supId = lblSid.getText();
+        double price = Double.parseDouble(txtPrice.getText());
         
         chemical_management a = new chemical_management();
         
-        if (tchemCode.isEmpty() || tchemName.isEmpty() || ttype.isEmpty() || supId.isEmpty()) {
+        if (tchemCode.isEmpty() || tchemName.isEmpty() || ttype.isEmpty() || supId.isEmpty() || price == 0.0) {
 
             JOptionPane.showMessageDialog(this, "You Should Fill All Fields");
         } else if (!tcon.isEmpty()) {
 
-            a.addChemical(tchemCode, tchemName, ttype, tcon, supId);
+            a.addChemical(tchemCode, tchemName, ttype, tcon, supId,price);
 
             tableload();
             clearfield();
 
         } else if (!tweight.isEmpty()) {
             
-            a.addChemical(tchemCode, tchemName, ttype, tweight, supId);
+            a.addChemical(tchemCode, tchemName, ttype, tweight, supId,price);
 
             tableload();
             clearfield();
@@ -459,6 +477,7 @@ public class manage_chemical extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+        txtPrice.setText(tblChemicalDetails.getValueAt(r1, 5).toString());
     }//GEN-LAST:event_tblChemicalDetailsMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -469,22 +488,23 @@ public class manage_chemical extends javax.swing.JInternalFrame {
         String tcon = txtConcentration.getText();
         String tweight = txtWeight.getText();
         String supId = lblSid.getText();
+        double price = Double.parseDouble(txtPrice.getText());
 
         chemical_management a = new chemical_management();
 
-        if (tchemCode.isEmpty() || tchemName.isEmpty() || ttype.isEmpty() || supId.isEmpty()) {
+        if (tchemCode.isEmpty() || tchemName.isEmpty() || ttype.isEmpty() || supId.isEmpty() | price ==0.0) {
 
             JOptionPane.showMessageDialog(this, "You Should Fill All Fields");
         } else if (!tcon.isEmpty()) {
 
-            a.updateChemical(tchemCode, tchemName, ttype, tcon, supId);
+            a.updateChemical(tchemCode, tchemName, ttype, tcon, supId,price);
 
             tableload();
             clearfield();
 
         } else if (!tweight.isEmpty()) {
 
-            a.updateChemical(tchemCode, tchemName, ttype, tweight, supId);
+            a.updateChemical(tchemCode, tchemName, ttype, tweight, supId,price);
 
             tableload();
             clearfield();
@@ -538,6 +558,10 @@ public class manage_chemical extends javax.swing.JInternalFrame {
         lblChemCode.setText(did);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPriceActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbChemType;
@@ -552,6 +576,7 @@ public class manage_chemical extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -564,6 +589,7 @@ public class manage_chemical extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblChemicalDetails;
     private javax.swing.JTextField txtChemName;
     private javax.swing.JTextField txtConcentration;
+    private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtSname;
     private javax.swing.JTextField txtWeight;
     // End of variables declaration//GEN-END:variables

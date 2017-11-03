@@ -6,10 +6,7 @@
 package Schedule;
 
 import Appointment.AMain;
-import Appointment.Add_Appointment;
 import DB.DBConnect;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

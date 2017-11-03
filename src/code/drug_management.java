@@ -22,6 +22,7 @@ public class drug_management {
     
     public void addDrugs(String tpresCode, String tpresName, String tcatagory, String tunitType, String tdiscrption, String tsupId, double tprice) {
 
+        
         c = DBconnection.getConnection();
 
         try {
@@ -70,8 +71,8 @@ public class drug_management {
 
         try {
 
-            String up = "UPDATE drug SET status='TE' WHERE presCode='" + tpresCode + "'";
-            p = c.prepareStatement(up);
+            String d = "UPDATE drug SET status='TE' WHERE presCode='" + tpresCode + "'";
+            p = c.prepareStatement(d);
             p.execute();
 
         } catch (SQLException ex) {

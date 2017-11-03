@@ -353,7 +353,7 @@ public class Manage_Lab_Test extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "You Should Fill All Fields");
         } else {
             lab_test_management a = new lab_test_management();
-            a.addLabTest(ttestCode, ttestsName, ttestType, tdiscrption,chemicals);
+            a.addLabTest(ttestCode, ttestsName, ttestType, tdiscrption);
             a.addLabTestChemecal(ttestCode, chemicals);
            /* try {
 
@@ -417,7 +417,7 @@ public class Manage_Lab_Test extends javax.swing.JInternalFrame {
             lab_test_management up = new lab_test_management();
             
             try {
-                up.updateLab(ttestCode, ttestsName, ttestType, tdiscrption,chemicals);
+                up.updateLab(ttestCode, ttestsName, ttestType, tdiscrption);
                 up.updateLabChemicals(ttestCode, chemicals);
             } catch (SQLException ex) {
                 System.out.println(ex);

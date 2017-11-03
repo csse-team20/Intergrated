@@ -63,6 +63,7 @@ public class searchDrug extends javax.swing.JInternalFrame {
         cmbSearch = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
 
+        setTitle("Search Drug Details");
         setPreferredSize(new java.awt.Dimension(1366, 550));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(

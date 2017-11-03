@@ -138,6 +138,7 @@ public class Manage_Patient_Lab_test extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         lblIID = new javax.swing.JLabel();
 
+        setTitle("Manage Ptient Lab Test");
         setPreferredSize(new java.awt.Dimension(1366, 550));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

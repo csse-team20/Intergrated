@@ -8,16 +8,13 @@ package com.csse.code;
 import Demo_Data.UserDemo;
 import com.toedter.calendar.JDateChooser;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -49,28 +46,10 @@ public class AddTest {
     /**
      * Test of addUserDetails method, of class Add.
      */
-//    @Test
-//    public void testAddUserDetails() {
-//        System.out.println("addUserDetails");
-//        String firstName = "";
-//        String lastName = "";
-//        String address = "";
-//        JTextField txtNic = null;
-//        String email = "";
-//        String phone = "";
-//        String type = "";
-//        JFileChooser jFileChooser1 = null;
-//        Add instance = new Add();
-//        instance.addUserDetails(firstName, lastName, address, txtNic, email, phone, type, jFileChooser1);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-
-    /**
-     * Test of addSalaryDetails method, of class Add.
-     */
     @Test
-    public void testAddSalaryDetails() throws JSONException, SQLException {
+    public void testAddUserDetails() throws JSONException, SQLException {
+
+        
         
         UserDemo ud = new UserDemo();
         
@@ -79,6 +58,17 @@ public class AddTest {
         JSONObject expObj = tu.getUsers();
         
         JSONObject actualObj = ud.addUsers();
+        
+        assertEquals(expObj.getString("tfirstName"), actualObj.getString("tfirstName"));
+    }
+
+    /**
+     * Test of addSalaryDetails method, of class Add.
+     */
+    @Test
+    public void testAddSalaryDetails() throws JSONException, SQLException {
+        
+        
         
 //        System.out.println("addSalaryDetails");
 //        JTextField txtEmpId = null;
@@ -92,36 +82,37 @@ public class AddTest {
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 
-        assertEquals(expObj.getString("tfirstName"), actualObj.getString("tfirstName"));
+        
     }
 
-//    /**
-//     * Test of applyLeave method, of class Add.
-//     */
-//    @Test
-//    public void testApplyLeave() {
-//        System.out.println("applyLeave");
-//        JRadioButton jbtnAnual = null;
-//        JTextField txtAnuLeave = null;
-//        JRadioButton jbtnCasual = null;
-//        JTextField txtCasuLeave = null;
-//        JRadioButton jbtnMedical = null;
-//        JTextField txtMediLeave = null;
-//        JTextField txtEmpID = null;
-//        JTextField txtEmpName = null;
-//        JDateChooser jdate = null;
-//        Add instance = new Add();
-//        instance.applyLeave(jbtnAnual, txtAnuLeave, jbtnCasual, txtCasuLeave, jbtnMedical, txtMediLeave, txtEmpID, txtEmpName, jdate);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of register method, of class Add.
-//     */
-//    @Test
-//    public void testRegister() {
-//        System.out.println("register");
+    /**
+     * Test of applyLeave method, of class Add.
+     */
+    @Test
+    public void testApplyLeave() {
+        System.out.println("applyLeave");
+        JRadioButton jbtnAnual = null;
+        JTextField txtAnuLeave = null;
+        JRadioButton jbtnCasual = null;
+        JTextField txtCasuLeave = null;
+        JRadioButton jbtnMedical = null;
+        JTextField txtMediLeave = null;
+        JTextField txtEmpID = null;
+        JTextField txtEmpName = null;
+        JDateChooser jdate = null;
+        Add instance = new Add();
+        instance.applyLeave(jbtnAnual, txtAnuLeave, jbtnCasual, txtCasuLeave, jbtnMedical, txtMediLeave, txtEmpID, txtEmpName, jdate);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of register method, of class Add.
+     */
+    @Test
+    public void testRegister() {
+        try {
+            System.out.println("register");
 //        JTextField txtNic = null;
 //        JTextField txtUserName = null;
 //        JTextField txtPassword = null;
@@ -131,6 +122,27 @@ public class AddTest {
 //        instance.register(txtNic, txtUserName, txtPassword, txtSecQuestion, txtAnswer);
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
-//    }
-//    
+
+
+        UserDemo ud = new UserDemo();
+
+        TestDataUser tu = new TestDataUser();
+
+        JSONObject expObj = tu.getRegisteredUsers();
+
+        JSONObject actualObj = ud.regiterUsers();
+
+        assertEquals(expObj.getString("tnic"), actualObj.getString("tnic"));
+        assertEquals(expObj.getString("tuserName"), actualObj.getString("tuserName"));
+        assertEquals(expObj.getString("tPassword"), actualObj.getString("tPassword"));
+        assertEquals(expObj.getString("tsecQuestion"), actualObj.getString("tsecQuestion"));
+        
+        
+        
+        } catch (JSONException | SQLException ex) {
+            Logger.getLogger(AddTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
 }

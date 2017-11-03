@@ -6,11 +6,10 @@
 package com.csse.ui;
 
 import Demo_Data.UserDemo;
-import Demo_Data.drug_Data;
 import com.csse.code.Add;
+import com.csse.code.Delete;
 import com.csse.code.Load;
 import com.csse.code.Update;
-import com.csse.db.Dbaccess;
 import com.csse.validation.CommonValidation;
 import com.csse.validation.UsersValidation;
 import java.util.logging.Level;
@@ -18,7 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.json.JSONException;
 import org.json.JSONObject;
-import pharmacy_lab.Add_drugs;
+
 
 /**
  *
@@ -442,10 +441,13 @@ public class Users extends javax.swing.JInternalFrame {
         common.emailAddressValidation(txtEmail);
         common.nicValidation(txtNic);
         common.phoneNumberValidation(txtPhone);
-        UsersValidation userval = new UsersValidation();
-        userval.imageSelect(lblImg2);
+        //UsersValidation userval = new UsersValidation();
+        userVal.imageSelect(lblImg2);
       
-
+        if(common.nicValidation(txtNic)||common.phoneNumberValidation(txtPhone)||common.emailAddressValidation(txtEmail)){
+            
+        
+            
         String id = lblId.getText();
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
@@ -456,9 +458,11 @@ public class Users extends javax.swing.JInternalFrame {
         String type = cmbType.getSelectedItem().toString();
         Update update = new Update();
         update.updateUserDetails(id, firstName, lastName, address, nic, email, phone, type, jFileChooser1, lblImg2);
+       // JOptionPane.showMessageDialog(rootPane,"Data Updated Sucessfuly");
         Load load = new Load();
         load.tableLoadUserDetails(jTable4);
         
+        }
 
     }//GEN-LAST:event_jbtnUpdateActionPerformed
 
@@ -468,13 +472,12 @@ public class Users extends javax.swing.JInternalFrame {
 
         if (x == 0) {
 
-            String id = lblId.getText();
-
-            String q = "DELETE FROM category WHERE cid='" + id + "' ";
-
-            Dbaccess da = new Dbaccess();
-
-            da.insertData(q);
+                    
+        Delete dl = new Delete();
+        dl.deleteUser(lblId);
+        JOptionPane.showMessageDialog(rootPane,"Data Deleted Succesfuly");
+        Load load = new Load();
+        load.tableLoadUserDetails(jTable4);
 
         }
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -531,9 +534,10 @@ public class Users extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
    
-        UserDemo d = new UserDemo();
-        
         try {
+            UserDemo d = new UserDemo();
+            
+            
             JSONObject o = d.addUsers();
             
             txtFirstName.setText(o.getString("tfirstName"));
@@ -544,11 +548,12 @@ public class Users extends javax.swing.JInternalFrame {
             txtPhone.setText(o.getString("tphone"));
             cmbType.setSelectedItem(o.getString("tType"));
             lblImg2.setText(o.getString("tImage"));
-            
-            
         } catch (JSONException ex) {
-            Logger.getLogger(Add_drugs.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
+            
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

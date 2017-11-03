@@ -13,7 +13,7 @@ public class Dbconnect {
         Connection conn = null;
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/channeling_center", "root", "1234");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/channeling_center", "root", "1234");
         } catch (Exception e) {
             e.printStackTrace();
         }
