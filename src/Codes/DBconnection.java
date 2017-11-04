@@ -18,8 +18,7 @@ public class DBconnection {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-         conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/channeling_center?autoReconnect=true&useSSL=false", "root", "1234");
-            //  conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/channeling_center?autoReconnect=true&useSSL=false", "root", "1234");
+            conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/channeling_center?autoReconnect=true&useSSL=false", "root", "1234");
         } catch (Exception e) {
             
             e.printStackTrace();

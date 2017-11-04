@@ -138,6 +138,7 @@ public class Manage_Patient_Lab_test extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         lblIID = new javax.swing.JLabel();
 
+        setTitle("Manage Ptient Lab Test");
         setPreferredSize(new java.awt.Dimension(1366, 550));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -596,7 +597,8 @@ public class Manage_Patient_Lab_test extends javax.swing.JInternalFrame {
             System.out.println(ttestName + ":" + ":" + ttestCode + ":" + dueDate);
 
             patient_lab_test_management a = new patient_lab_test_management();
-            a.addPatientLabTest(tlabid, tname, ttestName, ttestCode, ttype, dueDate, tststus, tpriority);
+            a.addPatientLabTest(tlabid, tname, ttestCode, dueDate, tststus, tpriority);
+            txtPatient.setText("");
 
         }
         tableload();

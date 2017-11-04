@@ -180,6 +180,7 @@ public class Order_Chemical extends javax.swing.JInternalFrame {
         AddButton = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
 
+        setTitle("Make Chemical Order");
         setPreferredSize(new java.awt.Dimension(1366, 550));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -691,12 +692,13 @@ public class Order_Chemical extends javax.swing.JInternalFrame {
         String unit = lblUnit.getText();
         double amount = Double.parseDouble(lblTPrice.getText());
         String qty = txtQty.getText();
+        String sup = "";
+        String tsup = "";
 
         int x = 0;
 
         validation vi = new validation();
-        
-        
+
         if (oid.isEmpty() || pid.isEmpty() || qty.isEmpty()) {
             JOptionPane.showMessageDialog(this, "You should fill all fields");
         } else if (vi.isnumber(qty)) {
@@ -715,6 +717,36 @@ public class Order_Chemical extends javax.swing.JInternalFrame {
                         }
                     }
                 }
+
+                if (filledRowCount > 0) {
+                    String proid = jTable3.getModel().getValueAt(0, 1).toString();
+
+                    try {
+                        String sql = "SELECT supId from chemical where chemCode = '" + proid + "'";
+                        p = c.prepareStatement(sql);
+                        rs = p.executeQuery();
+
+                        while (rs.next()) {
+                            sup = rs.getString("supId");
+                        }
+                    } catch (SQLException ex) {
+                        System.out.println(ex);
+                    }
+
+                    try {
+                        String sql2 = "SELECT supId from chemical where chemCode = '" + pid + "'";
+                        p = c.prepareStatement(sql2);
+                        rs = p.executeQuery();
+
+                        while (rs.next()) {
+                            tsup = rs.getString("supId");
+                        }
+                    } catch (SQLException ex) {
+                        System.out.println(ex);
+                    }
+
+                }
+
                 if (addIdPresed == false) {
                     jTable3.removeColumn(jTable3.getColumnModel().getColumn(8));
                 }
@@ -729,7 +761,7 @@ public class Order_Chemical extends javax.swing.JInternalFrame {
                     jTable3.setValueAt(qty, 0, 6);
                     jTable3.setValueAt(amount, 0, 7);
 
-                } else {
+                } else if (filledRowCount > 0 && sup.equals(tsup)) {
                     for (int i = 0; i < filledRowCount; i++) {
                         String code = jTable3.getValueAt(i, 1).toString();
                         if (code.equals(pid)) {
@@ -747,6 +779,8 @@ public class Order_Chemical extends javax.swing.JInternalFrame {
 
                         }
                     }
+                } else {
+                    JOptionPane.showMessageDialog(this, "You cannot add diffrent suppler products");
                 }
                 x = JOptionPane.showConfirmDialog(this, "Do you want to place the order to same supplier");
                 setvalue();
@@ -785,13 +819,15 @@ public class Order_Chemical extends javax.swing.JInternalFrame {
             System.out.println(oid + " " + pid + " " + qty);
             order_management a = new order_management();
             a.orderChemical(oid, pid, qty);
+            
             tableload();
 
         }
-
+        JOptionPane.showMessageDialog(this, "Order has successfully added");
         IncrementId mf = new IncrementId();
-        String did = mf.setId("orderId", "order_drug", "ORDP");
+        String did = mf.setId("orderId", "order_chem", "ORDC");
         lblOid.setText(did);
+        setvalue();
     }//GEN-LAST:event_jButton11ActionPerformed
 
 

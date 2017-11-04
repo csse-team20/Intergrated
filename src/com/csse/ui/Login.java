@@ -240,7 +240,7 @@ public class Login extends javax.swing.JFrame {
                 
             }
             
-              if(!userName.equals(name) && !password.equals(pass)){
+              if(!userName.equals(name) || !password.equals(pass)){
                   JOptionPane.showMessageDialog(jpassword,"Login Failed");
                   
               }

@@ -5,11 +5,15 @@
  */
 package Codes;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
 
 /**
  *
@@ -20,7 +24,7 @@ public class Diagnosis_Data {
     Connection c = null;
     PreparedStatement p = null;
     ResultSet rs = null;
-    
+
      public void save(String pdiagId,String pPid,String pSigns,String pGeneral,String pSystemic,String pDiagnosis){
         
         c = DBconnection.getConnection();

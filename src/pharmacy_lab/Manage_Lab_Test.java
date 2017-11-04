@@ -417,7 +417,7 @@ public class Manage_Lab_Test extends javax.swing.JInternalFrame {
             lab_test_management up = new lab_test_management();
             
             try {
-                up.updateLab(ttestCode, ttestsName, ttestType, tdiscrption,chemicals);
+                up.updateLab(ttestCode, ttestsName, ttestType, tdiscrption);
                 up.updateLabChemicals(ttestCode, chemicals);
             } catch (SQLException ex) {
                 System.out.println(ex);

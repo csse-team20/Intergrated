@@ -5,62 +5,84 @@
  */
 package code;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import Demo_Data.Chemical_Data;
+import java.sql.SQLException;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
 /**
  *
  * @author Lakshika
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class chemical_managementTest {
     
+    Chemical_Data cd = new Chemical_Data();
+    //chemical_management cm = new chemical_management();
+    String chemCode = "";
+    
     @Test
-    public void testAddChemical() {
-        System.out.println("addChemical");
-        String tchemCode = "";
-        String tchemName = "";
-        String ttype = "";
-        String tqty = "";
-        String supId = "";
+    public void testAddChemical() throws JSONException, SQLException {
+        
+        JSONObject exp = cd.AddChemical();
+        
+        chemCode = exp.getString("tchemCode");
+        String tchemName = exp.getString("tchemName");
+        String ttype = exp.getString("ttype");
+        String tqty = exp.getString("qty");
+        String supId = exp.getString("supId");
+        double price = Double.parseDouble(exp.getString("price"));
+        
         chemical_management instance = new chemical_management();
-        instance.addChemical(tchemCode, tchemName, ttype, tqty, supId);
+        instance.addChemical(chemCode, tchemName, ttype, tqty, supId,price);
         
         TestData td = new TestData();
-        //td.drugData();
+        JSONObject act = td.chemicalData();
+        
+        assertEquals(chemCode, act.getString("tchemCode"));
+        assertEquals(tchemName, act.getString("tchemName"));
+        assertEquals(ttype, act.getString("ttype"));
+        assertEquals(supId, act.getString("supId"));
+        
     }
 
-    /**
-     * Test of updateChemical method, of class chemical_management.
-     */
-    @Test
-    public void testUpdateChemical() {
-        System.out.println("updateChemical");
-        String tchemCode = "";
-        String tchemName = "";
-        String ttype = "";
-        String tqty = "";
-        String supId = "";
+   @Test
+    public void testUpdateChemical() throws JSONException, SQLException {
+        
+        JSONObject exp = cd.UpdateChemical();
+        
+        String tchemName = exp.getString("tchemName");
+        String ttype = exp.getString("ttype");
+        String tqty = exp.getString("qty");
+        String supId = exp.getString("supId");
+        double price = Double.parseDouble(exp.getString("price"));
+        
         chemical_management instance = new chemical_management();
-        instance.updateChemical(tchemCode, tchemName, ttype, tqty, supId);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.updateChemical(chemCode, tchemName, ttype, tqty, supId,price);
+        
+        TestData td = new TestData();
+        JSONObject act = td.chemicalData();
+        
+        assertEquals(chemCode, act.getString("tchemCode"));
+        assertEquals(tchemName, act.getString("tchemName"));
+        assertEquals(ttype, act.getString("ttype"));
+        assertEquals(supId, act.getString("supId"));
+        
     }
 
-    /**
-     * Test of deleteChemical method, of class chemical_management.
-     */
     @Test
-    public void testDeleteChemical() {
-        System.out.println("deleteChemical");
-        String chemCode = "";
+    public void testDeleteChemical() throws SQLException, JSONException {
+                
         chemical_management instance = new chemical_management();
         instance.deleteChemical(chemCode);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
+        TestData td = new TestData();
+        JSONObject act = td.chemicalData();
+        
+        assertEquals("TE", act.getString("status"));
     }
     
 }

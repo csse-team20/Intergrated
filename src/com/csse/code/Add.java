@@ -10,7 +10,6 @@ import com.csse.validation.RegisterValidation;
 import com.csse.validation.UsersValidation;
 import com.toedter.calendar.JDateChooser;
 import java.io.File;
-import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -24,56 +23,55 @@ import javax.swing.JTextField;
  */
 public class Add {
 
-    public void addUserDetails(String firstName, String lastName, String address,JTextField txtNic, String email, String phone, String type, JFileChooser jFileChooser1) {
+    public void addUserDetails(String firstName, String lastName, String address, JTextField txtNic, String email, String phone, String type, JFileChooser jFileChooser1) {
 
         UsersValidation userval = new UsersValidation();
-       
+
         userval.isExistingNic(txtNic);
-        
-        
+
         String nic = txtNic.getText();
-        
-        if(userval.isExistingNic(txtNic)){
-            
-            JOptionPane.showMessageDialog(jFileChooser1,"NIC is Existing");
-            
-        }else{
-        File picFile = jFileChooser1.getSelectedFile();
-        //String path = picFile.getAbsolutePath();
-        //path = path.replace("\\", "/");
 
-        if (picFile != null) {
-            String path = picFile.getAbsolutePath();
-            path = path.replace("\\", "/");
+        if (userval.isExistingNic(txtNic)) {
 
-            String query = "INSERT INTO `channeling_center`.`users` (\n"
-                    + "	`FIRST_NAME`,\n"
-                    + "	`LAST_NAME`,\n"
-                    + "	`ADDRESS`,\n"
-                    + "	`NIC`,\n"
-                    + "	`EMAIL`,\n"
-                    + "	`PHONE`,\n"
-                    + "	`TYPE`,\n"
-                    + "	`IMAGE`\n"
-                    + ")\n"
-                    + "VALUES\n"
-                    + "	(\n"
-                    + " '" + firstName + "',\n"
-                    + " '" + lastName + "',\n"
-                    + "	'" + address + "',\n"
-                    + "	'" + nic + "',\n"
-                    + "	'" + email + "',\n"
-                    + "	'" + phone + "',\n"
-                    + "	'" + type + "',\n"
-                    + "	'" + path + "'\n"
-                    + "	);";
-            Dbaccess da = new Dbaccess();
+            JOptionPane.showMessageDialog(jFileChooser1, "NIC is Existing");
 
-            da.insertData(query);
+        } else {
+            File picFile = jFileChooser1.getSelectedFile();
+            //String path = picFile.getAbsolutePath();
+            //path = path.replace("\\", "/");
 
-            JOptionPane.showMessageDialog(jFileChooser1, "Data Saved Successfuly");
-            //  JOptionPane.showMessageDialog(jFileChooser1,"Data Saved to users table");
-        }
+            if (picFile != null) {
+                String path = picFile.getAbsolutePath();
+                path = path.replace("\\", "/");
+
+                String query = "INSERT INTO `channeling_center`.`users` (\n"
+                        + "	`FIRST_NAME`,\n"
+                        + "	`LAST_NAME`,\n"
+                        + "	`ADDRESS`,\n"
+                        + "	`NIC`,\n"
+                        + "	`EMAIL`,\n"
+                        + "	`PHONE`,\n"
+                        + "	`TYPE`,\n"
+                        + "	`IMAGE`\n"
+                        + ")\n"
+                        + "VALUES\n"
+                        + "	(\n"
+                        + " '" + firstName + "',\n"
+                        + " '" + lastName + "',\n"
+                        + "	'" + address + "',\n"
+                        + "	'" + nic + "',\n"
+                        + "	'" + email + "',\n"
+                        + "	'" + phone + "',\n"
+                        + "	'" + type + "',\n"
+                        + "	'" + path + "'\n"
+                        + "	);";
+                Dbaccess da = new Dbaccess();
+
+                da.insertData(query);
+
+                JOptionPane.showMessageDialog(jFileChooser1, "Data Saved Successfuly");
+                //  JOptionPane.showMessageDialog(jFileChooser1,"Data Saved to users table");
+            }
         }
     }
 
@@ -93,7 +91,7 @@ public class Add {
                 + "	('" + empId + "', '" + paymentFee + "','" + noOfDays + "', '" + salary + "', '" + bonus + "', '" + year + "' );";
         Dbaccess da = new Dbaccess();
         da.insertData(query);
-        JOptionPane.showMessageDialog(txtPayment,"Data Saved Succesfuly");
+        JOptionPane.showMessageDialog(txtPayment, "Data Saved Succesfuly");
 
     }
 
@@ -157,11 +155,11 @@ public class Add {
                 + "	(`EMP_ID` = '" + empId + "') AND (`DATE` = '" + year + "');";
 
         da.insertData(queryAttendance);
-        JOptionPane.showMessageDialog(txtEmpName,"Data Saved Successfuly");
+        JOptionPane.showMessageDialog(txtEmpName, "Data Saved Successfuly");
     }
 
     public void register(JTextField txtNic, JTextField txtUserName, JTextField txtPassword, JTextField txtSecQuestion, JTextField txtAnswer) {
-        
+
         String nic = txtNic.getText();
         String userName = txtUserName.getText();
         String password = txtPassword.getText();
@@ -170,10 +168,10 @@ public class Add {
         String answer = txtAnswer.getText();
         RegisterValidation reg = new RegisterValidation();
         reg.isRegExistingNic(txtNic);
-        
-        if(reg.isRegExistingNic(txtNic)){
-            JOptionPane.showMessageDialog(txtAnswer,"Nic Existing");
-            
+
+        if (reg.isRegExistingNic(txtNic)) {
+            JOptionPane.showMessageDialog(txtAnswer, "Nic Existing");
+
         } else {
             String query = "INSERT INTO `channeling_center`.`login` (\n"
                     + "	`NIC`,\n"
@@ -190,12 +188,12 @@ public class Add {
                     + "		'" + secQuestion + "',\n"
                     + "		'" + answer + "'\n"
                     + "	);";
-            
+
             Dbaccess da = new Dbaccess();
-            
+
             da.insertData(query);
-            
-            JOptionPane.showMessageDialog(txtAnswer,"Data Saved Succesfuly");
-        } 
+
+            JOptionPane.showMessageDialog(txtAnswer, "Data Saved Succesfuly");
+        }
     }
 }

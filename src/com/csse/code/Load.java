@@ -7,7 +7,6 @@ package com.csse.code;
 
 import com.csse.db.Dbaccess;
 import com.csse.ui.EmpLeaves;
-import com.csse.ui.Login;
 import com.csse.ui.MainMenu;
 import com.csse.validation.LoginValidation;
 import com.toedter.calendar.JDateChooser;
@@ -40,7 +39,6 @@ public class Load {
 
     public void getSecQuestion(String nic, JTextField txtQuestion) {
 
-        
         try {
             ResultSet rs;
             String query = "SELECT\n"
@@ -62,7 +60,6 @@ public class Load {
         } catch (SQLException ex) {
             Logger.getLogger(Load.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
 
     }
 
@@ -70,10 +67,9 @@ public class Load {
 
         try {
             String query = "SELECT * FROM login WHERE NIC = '" + nic + "'";
-            
+
             Dbaccess da = new Dbaccess();
-            
-            
+
             ResultSet rs;
 
             rs = da.getData(query);
@@ -92,7 +88,6 @@ public class Load {
         } catch (SQLException ex) {
             Logger.getLogger(Load.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
 
     }
 
@@ -100,17 +95,14 @@ public class Load {
 
         String q = "SELECT ID,FIRST_NAME,NIC FROM users";
 
-        
         Dbaccess da = new Dbaccess();
 
         jTable4.setModel(DbUtils.resultSetToTableModel(da.getData(q)));
 
-        
     }
 
     public void selectImage(JFileChooser jFileChooser1, JLabel lblImg2) {
 
-        
         try {
             jFileChooser1.showOpenDialog(null);
             File file = jFileChooser1.getSelectedFile();
@@ -125,7 +117,6 @@ public class Load {
         } catch (IOException ex) {
             Logger.getLogger(Load.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
 
     }
 
@@ -135,18 +126,16 @@ public class Load {
         try {
             ResultSet rs;
             int row = jTable4.getSelectedRow();
-            
+
             String id = jTable4.getValueAt(row, 0).toString();
             String firstName = jTable4.getValueAt(row, 1).toString();
             String nic = jTable4.getValueAt(row, 2).toString();
-            
+
             lblId.setText(id);
             txtFirstName.setText(firstName);
-            
+
             txtNic.setText(nic);
-            
-            
-            
+
             Dbaccess da = new Dbaccess();
             String query = "SELECT * FROM users WHERE ID ='" + id + "';";
             rs = da.getData(query);
@@ -170,8 +159,6 @@ public class Load {
             Logger.getLogger(Load.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        
-
     }
 
     public void findNoOfDays(JTextField txtEmpId, JDateChooser jdateSalary, JTextField txtNoOfDays) {
@@ -181,8 +168,7 @@ public class Load {
             String empId = txtEmpId.getText();
             SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
             String year = date.format(jdateSalary.getDate());
-            
-            
+
             ResultSet rs;
 
             String query = "SELECT\n"
@@ -203,8 +189,6 @@ public class Load {
         } catch (SQLException ex) {
             Logger.getLogger(Load.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-       
 
     }
 
@@ -231,8 +215,7 @@ public class Load {
 
             }
             jtableReg.setModel(DbUtils.resultSetToTableModel(da.getData(query)));
-        } 
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(EmpLeaves.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -281,8 +264,7 @@ public class Load {
                 JOptionPane.showMessageDialog(jpassword, "Login Failed");
 
             }
-        } 
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(Load.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -291,11 +273,10 @@ public class Load {
     public void loadEmpDetails(JTextField txtEmpID, JTextField txtEmpName, JTextField txtAnuLeave, JTextField txtCasuLeave, JTextField txtMediLeave) {
 
         try {
-             ResultSet rs;
-            
+            ResultSet rs;
+
             String empId = txtEmpID.getText();
 
-           
             Dbaccess da = new Dbaccess();
             String query = "SELECT\n"
                     + "	`leave`.EMP_ID,\n"
@@ -316,13 +297,11 @@ public class Load {
                 txtCasuLeave.setText(rs.getString("CASUAL_LEAVE"));
                 txtMediLeave.setText(rs.getString("MEDICAL_LEAVE"));
             }
-        
-        }catch (SQLException ex) {
+
+        } catch (SQLException ex) {
             Logger.getLogger(Load.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
-   
-    
+
 }

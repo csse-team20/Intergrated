@@ -22,7 +22,7 @@ public class patient_lab_test_management {
     PreparedStatement p = null;
     ResultSet rs = null;
     
-    public void addPatientLabTest(String tlabid, String tname, String ttestName, String ttestCode, String ttype, Date dueDate, String tststus, String tpriority) {
+    public void addPatientLabTest(String tlabid, String tname,  String ttestCode,Date dueDate, String tststus, String tpriority) {
 
         c = DBconnection.getConnection();
 
@@ -34,11 +34,13 @@ public class patient_lab_test_management {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+        System.out.println("after patient");
         try {
             String patientlab = "INSERT INTO lab_patient_test (testCode, labid, status, priority, duedate) "
                     + "VALUES ('" + ttestCode + "', '" + tlabid + "', '" + tststus + "', '" + tpriority + "', '" + dueDate + "')";
             p = c.prepareStatement(patientlab);
             p.execute();
+            System.out.println("after patient lab");
         } catch (SQLException ex) {
             System.out.println(ex);
         }

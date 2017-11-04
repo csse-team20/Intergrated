@@ -1,5 +1,6 @@
 package pharmacy_lab;
 
+import Codes.Email;
 import code.DBconnection;
 import code.IncrementId;
 import code.order_management;
@@ -185,8 +186,6 @@ public class Drug_order extends javax.swing.JInternalFrame {
         lblUnit = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        lblOCost = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
         DeleteButton = new javax.swing.JButton();
         UpdateButton = new javax.swing.JButton();
@@ -460,19 +459,13 @@ public class Drug_order extends javax.swing.JInternalFrame {
 
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(351, 260, 989, 160));
 
-        lblOCost.setEditable(false);
-        getContentPane().add(lblOCost, new org.netbeans.lib.awtextra.AbsoluteConstraints(1093, 432, 148, -1));
-
-        jLabel1.setText("Total Order Cost");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(995, 435, -1, -1));
-
         jButton11.setText("Place Order");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton11ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1251, 431, -1, -1));
+        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 440, -1, -1));
 
         DeleteButton.setText("Delete");
         DeleteButton.addActionListener(new java.awt.event.ActionListener() {
@@ -633,7 +626,7 @@ public class Drug_order extends javax.swing.JInternalFrame {
         String qty = txtQty.getText();
         String sup = "";
         String tsup = "";
-        System.out.println(oid + " " + pid + " " + pname + " " + price + " " + category + " " + unit + " " + amount + " " + qty);
+        //System.out.println(oid + " " + pid + " " + pname + " " + price + " " + category + " " + unit + " " + amount + " " + qty);
         int x = 0;
 
         validation vi = new validation();
@@ -683,7 +676,7 @@ public class Drug_order extends javax.swing.JInternalFrame {
                     }
 
                 }
-                System.out.println("filled " + filledRowCount);
+                
                 if (addIdPresed == false) {
                     jTable3.removeColumn(jTable3.getColumnModel().getColumn(8));
                 }
@@ -794,17 +787,20 @@ public class Drug_order extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+
         System.out.println("order");
         String oid = "";
         String pid = "";
         String sup = "";
+        String proName = "";
+        String msg[] = new String[10];
+        String email = "";
 
         int qty = 0;
 
         int filledRowCount = 0;
         rowSearch:
         for (int row = 0; row < jTable3.getRowCount(); row++) {
-            System.out.println("fill");
             for (int col = 0; col < jTable3.getColumnCount(); col++) {
                 if (jTable3.getValueAt(row, col) == null) {
                     break rowSearch;
@@ -818,12 +814,14 @@ public class Drug_order extends javax.swing.JInternalFrame {
             String proid = jTable3.getModel().getValueAt(0, 1).toString();
 
             try {
-                String sql = "SELECT supId from drug where presCode = '" + proid + "'";
+                String sql = "SELECT d.supId as 'supId',s.email as 'email' from drug d,supplier s "
+                        + "where d.presCode = '" + proid + "' AND d.supId = s.supId";
                 p = c.prepareStatement(sql);
                 rs = p.executeQuery();
 
                 while (rs.next()) {
                     sup = rs.getString("supId");
+                    email = rs.getString("email");
                 }
             } catch (SQLException ex) {
                 System.out.println(ex);
@@ -834,13 +832,25 @@ public class Drug_order extends javax.swing.JInternalFrame {
             oid = jTable3.getValueAt(i, 0).toString();
             pid = jTable3.getValueAt(i, 1).toString();
             qty = Integer.parseInt((String) jTable3.getValueAt(i, 6));
+            proName = jTable3.getValueAt(i, 2).toString();
 
             order_management a = new order_management();
-            a.orderDrug(oid, pid, qty,sup);
-            SupplierTableload();
+            a.orderDrug(oid, pid, qty, sup);
+            //SupplierTableload();
             // clearTable(filledRowCount);
 
         }
+        for (int i = 0; i < filledRowCount; i++) {
+
+            qty = Integer.parseInt((String) jTable3.getValueAt(i, 6));
+            proName = jTable3.getValueAt(i, 2).toString();
+
+            msg[i] = proName + "-" + qty;
+            Email e = new Email();
+            e.sendMail(oid, email, msg[i]);
+            //System.out.println(qty + " " + proName + " " + msg[i]);
+        }
+        //System.out.println("msg is " + msg[0]);
 
         IncrementId mf = new IncrementId();
         String did = mf.setId("orderId", "order_drug", "ORD");
@@ -873,7 +883,6 @@ public class Drug_order extends javax.swing.JInternalFrame {
     private javax.swing.JButton DeleteButton;
     private javax.swing.JButton UpdateButton;
     private javax.swing.JButton jButton11;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -891,7 +900,6 @@ public class Drug_order extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTextField lblOCost;
     private javax.swing.JLabel lblOid;
     private javax.swing.JLabel lblPPrice;
     private javax.swing.JLabel lblPid;

@@ -69,6 +69,7 @@ public class searchLabTest extends javax.swing.JInternalFrame {
         jTable2 = new javax.swing.JTable();
         txtSearch = new javax.swing.JTextField();
 
+        setTitle("Search Lab Test");
         setPreferredSize(new java.awt.Dimension(1366, 550));
 
         cmbSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select search ", "Search by Test Name", "Search by Test Code", "Search by Test Type" }));

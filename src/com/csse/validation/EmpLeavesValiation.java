@@ -5,8 +5,6 @@
  */
 package com.csse.validation;
 
-import csse.EmpLeaves;
-
 /**
  *
  * @author Anuradha Sanjeewa

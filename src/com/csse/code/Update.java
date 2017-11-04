@@ -30,30 +30,27 @@ public class Update {
 
         path = lblImg2.getText();
 
-        
+        System.out.println(path);
+        Dbaccess da = new Dbaccess();
 
-            System.out.println(path);
-            Dbaccess da = new Dbaccess();
+        String query = "UPDATE `channeling_center`.`users`\n"
+                + "SET `ID` = '" + id + "',\n"
+                + " `FIRST_NAME` = '" + firstName + "',\n"
+                + " `LAST_NAME` = '" + lastName + "',\n"
+                + " `ADDRESS` = '" + address + "',\n"
+                + " `NIC` = '" + nic + "',\n"
+                + " `EMAIL` = '" + email + "',\n"
+                + " `PHONE` = '" + phone + "',\n"
+                + " `TYPE` = '" + type + "',\n"
+                + " `IMAGE` = '" + path + "'\n"
+                + "WHERE\n"
+                + "	(`ID` = '" + id + "')\n"
+                + "AND (`NIC` = '" + nic + "');";
 
-            String query = "UPDATE `channeling_center`.`users`\n"
-                    + "SET `ID` = '" + id + "',\n"
-                    + " `FIRST_NAME` = '" + firstName + "',\n"
-                    + " `LAST_NAME` = '" + lastName + "',\n"
-                    + " `ADDRESS` = '" + address + "',\n"
-                    + " `NIC` = '" + nic + "',\n"
-                    + " `EMAIL` = '" + email + "',\n"
-                    + " `PHONE` = '" + phone + "',\n"
-                    + " `TYPE` = '" + type + "',\n"
-                    + " `IMAGE` = '" + path + "'\n"
-                    + "WHERE\n"
-                    + "	(`ID` = '" + id + "')\n"
-                    + "AND (`NIC` = '" + nic + "');";
+        da.insertData(query);
 
-             da.insertData(query);
-            
-            JOptionPane.showMessageDialog(jFileChooser1,"Data Updated Succesfuly");
+        JOptionPane.showMessageDialog(jFileChooser1, "Data Updated Succesfuly");
 
-       
     }
 
 }

@@ -21,8 +21,8 @@ public class chemical_management {
     PreparedStatement p = null;
     ResultSet rs = null;
     
-    public void addChemical(String tchemCode, String tchemName, String ttype, String tqty, String supId) {
-        
+    public void addChemical(String tchemCode, String tchemName, String ttype, String tqty, String supId,double price) {
+        System.out.println("chemical add: "+tchemCode+" "+tchemName+" "+ttype+" "+tqty+" "+supId+" "+price);
         c = DBconnection.getConnection();
 
         try {
@@ -32,7 +32,8 @@ public class chemical_management {
                     + "	`type`,\n"
                     + "	`qty`,\n"
                     + "	`supId`,\n"
-                    + "     `statua`\n"
+                    + " `status`,\n"
+                    + " `price`\n"
                     + ")\n"
                     + "VALUES\n"
                     + "	(\n"
@@ -41,8 +42,9 @@ public class chemical_management {
                     + "'" + ttype + "',\n"
                     + "'" + tqty + "',\n"
                     + "'" + supId + "',\n"
-                    + "'NT'\n"
-                    + "	);";
+                    + "'NT',\n"
+                    + " '"+price+"'\n"
+                    + ");";
 
             p = c.prepareStatement(chem);
             p.execute();
@@ -52,7 +54,7 @@ public class chemical_management {
         }
     }
     
-    public void updateChemical(String tchemCode, String tchemName, String ttype, String tqty, String supId){
+    public void updateChemical(String tchemCode, String tchemName, String ttype, String tqty, String supId,double price){
         
         c = DBconnection.getConnection();
         
@@ -62,7 +64,8 @@ public class chemical_management {
                     + "SET chemName = '" + tchemName + "',"
                     + "type = '" + ttype + "',"
                     + "qty = '" + tqty + "',"
-                    + "supId = '" + supId + "'"
+                    + "supId = '" + supId + "',"
+                    + "price = '" + price + "'"
                     + "WHERE chemCode = '" + tchemCode + "'";
             p = c.prepareStatement(up);
             p.execute();

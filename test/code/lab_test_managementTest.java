@@ -5,6 +5,14 @@
  */
 package code;
 
+import Demo_Data.labTest_data;
+import java.sql.SQLException;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -13,78 +21,98 @@ import static org.junit.Assert.*;
  * @author Lakshika
  */
 public class lab_test_managementTest {
-    
-    
-    @Test
-    public void testAddLabTest() {
-        System.out.println("addLabTest");
-        String ttestCode = "";
-        String ttestsName = "";
-        String ttestType = "";
-        String tdiscrption = "";
-        String[] chemical = null;
-        lab_test_management instance = new lab_test_management();
-     //   instance.addLabTest(ttestCode, ttestsName, ttestType, tdiscrption, chemical);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
-    /**
-     * Test of addLabTestChemecal method, of class lab_test_management.
-     */
+    labTest_data dl = new labTest_data();
+    TestData td = new TestData();
+    String testCode = "";
+
     @Test
-    public void testAddLabTestChemecal() {
-        System.out.println("addLabTestChemecal");
-        String ttestCode = "";
-        String[] chemical = null;
+    public void testAddLabTest() throws JSONException, SQLException {
+        
+        JSONObject exp = dl.AddLabTest();
+        
+        testCode = exp.getString("ttestCode");
+        String ttestsName = exp.getString("ttestsName");
+        String ttestType = exp.getString("ttestType");
+        String tdiscrption = exp.getString("tdiscrption");
+        
+        lab_test_management instance = new lab_test_management();
+        instance.addLabTest(testCode, ttestsName, ttestType, tdiscrption);
+        
+        JSONObject act = td.labTestData();
+        
+        assertEquals(testCode, act.getString("ttestCode"));
+        assertEquals(ttestsName, act.getString("ttestsName"));
+        assertEquals(ttestType, act.getString("ttestType"));
+        assertEquals(tdiscrption, act.getString("tdiscrption"));
+    }
+    
+  /*  @Test
+    public void testAddLabTestChemecal() throws JSONException, SQLException {
+
+        int count=0;
+    
+        String ttestCode = "LAB1010";
+        String chemical[] = {"abcd", "hkj"};
+
         lab_test_management instance = new lab_test_management();
         instance.addLabTestChemecal(ttestCode, chemical);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
-    /**
-     * Test of updateLab method, of class lab_test_management.
-     */
+        JSONObject act = td.labTestChemicalData();
+
+        assertEquals(testCode, act.getString("testcode"));
+        while (act.getString("chemicals") != null) {
+            assertEquals(chemical[count], act.getString("chemicals"));
+            count++;
+        }
+
+    }*/
+
     @Test
-    public void testUpdateLab() {
-        System.out.println("updateLab");
-        String ttestCode = "";
-        String ttestsName = "";
-        String ttestType = "";
-        String tdiscrption = "";
-        String[] chemicals = null;
+    public void testUpdateLab() throws JSONException, SQLException {
+        
+        JSONObject exp = dl.UpdateLabTest();
+        
+        String ttestsName = exp.getString("ttestsName");
+        String ttestType = exp.getString("ttestType");
+        String tdiscrption = exp.getString("tdiscrption");
+        
         lab_test_management instance = new lab_test_management();
-        instance.updateLab(ttestCode, ttestsName, ttestType, tdiscrption, chemicals);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.updateLab(testCode, ttestsName, ttestType, tdiscrption);
+        
+        JSONObject act = td.labTestData();
+        
+        assertEquals(ttestsName, act.getString("ttestsName"));
+        assertEquals(ttestType, act.getString("ttestType"));
+        assertEquals(tdiscrption, act.getString("tdiscrption"));
+
     }
 
-    /**
-     * Test of updateLabChemicals method, of class lab_test_management.
-     */
-    @Test
+    /*@Test
     public void testUpdateLabChemicals() throws Exception {
-        System.out.println("updateLabChemicals");
-        String ttestCode = "";
-        String[] chemicals = null;
+        
+        int count=0;
+        String[] chemicals = {"abcd"};
+        
         lab_test_management instance = new lab_test_management();
-        instance.updateLabChemicals(ttestCode, chemicals);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        instance.updateLabChemicals(testCode, chemicals);
+        
+        JSONObject act = td.labTestChemicalData();
+        
+        while (act.getString("chemicals") != null) {
+            assertEquals(chemicals[count], act.getString("chemicals"));
+            count++;
+        }
+    }*/
 
-    /**
-     * Test of deleteLab method, of class lab_test_management.
-     */
     @Test
-    public void testDeleteLab() {
-        System.out.println("deleteLab");
-        String tlabCode = "";
+    public void testDeleteLab() throws SQLException, JSONException {
+        
         lab_test_management instance = new lab_test_management();
-        instance.deleteLab(tlabCode);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.deleteLab("LAB1010");
+        
+        JSONObject act = td.labTestData();
+        
+        assertEquals("TE", act.getString("tsatus"));
     }
-    
 }

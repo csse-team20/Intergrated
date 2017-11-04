@@ -38,7 +38,8 @@ public class searchDrug extends javax.swing.JInternalFrame {
 
         try {
             
-            String sql1 = "SELECT p.presCode as 'Prescription Code',p.presName as 'Prescription Name',p.category as 'Category',p.unitType as 'Unit Type',p.discription as 'Discription' FROM drug p";
+            String sql1 = "SELECT p.presCode as 'Prescription Code',p.presName as 'Prescription Name',p.category as 'Category',p.unitType as 'Unit Type',p.discription as 'Discription',p.current_qty as 'Current Quantity' "
+                    + "FROM drug p";
             p = c.prepareStatement(sql1);
             rs = p.executeQuery();
             jTable1.setModel(DbUtils.resultSetToTableModel(rs));
@@ -63,28 +64,29 @@ public class searchDrug extends javax.swing.JInternalFrame {
         cmbSearch = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
 
+        setTitle("Search Drug Details");
         setPreferredSize(new java.awt.Dimension(1366, 550));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Prescription Code", "Prescription Name", "Category", "Unit Type", "Date"
+                "Prescription Code", "Prescription Name", "Category", "Unit Type", "Date", "Current Quantity"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -144,7 +146,9 @@ public class searchDrug extends javax.swing.JInternalFrame {
         String text = txtbyName.getText();
         if (num == 1) {
             try {
-                String sp = "SELECT p.presCode as 'Prescription Code',p.presName as 'Prescription Name',p.category as 'Category',p.unitType as 'Unit Type',p.discription as 'Discription' FROM drug p WHERE p.presName like '%" + text + "%'";
+                String sp = "SELECT p.presCode as 'Prescription Code',p.presName as 'Prescription Name',p.category as 'Category',p.unitType as 'Unit Type',p.discription as 'Discription',p.current_qty as 'Current Quantity' "
+                        + "FROM drug p "
+                        + "WHERE p.presName like '%" + text + "%'";
                 p = c.prepareStatement(sp);
                 rs = p.executeQuery();
                 jTable1.setModel(DbUtils.resultSetToTableModel(rs));
@@ -156,7 +160,9 @@ public class searchDrug extends javax.swing.JInternalFrame {
             }
         } else if (num == 2) {
             try {
-                String sp = "SELECT p.presCode as 'Prescription Code',p.presName as 'Prescription Name',p.category as 'Category',p.unitType as 'Unit Type',p.discription as 'Discription' FROM drug p WHERE p.category like '%" + text + "%'";
+                String sp = "SELECT p.presCode as 'Prescription Code',p.presName as 'Prescription Name',p.category as 'Category',p.unitType as 'Unit Type',p.discription as 'Discription',p.current_qty as 'Current Quantity'"
+                        + " FROM drug p "
+                        + "WHERE p.category like '%" + text + "%'";
                 p = c.prepareStatement(sp);
                 rs = p.executeQuery();
                 jTable1.setModel(DbUtils.resultSetToTableModel(rs));
@@ -167,7 +173,9 @@ public class searchDrug extends javax.swing.JInternalFrame {
             }
         } else if (num == 3) {
             try {
-                String sp = "SELECT p.presCode as 'Prescription Code',p.presName as 'Prescription Name',p.category as 'Category',p.unitType as 'Unit Type',p.discription as 'Discription' FROM drug p WHERE p.presCode like '%" + text + "%'";
+                String sp = "SELECT p.presCode as 'Prescription Code',p.presName as 'Prescription Name',p.category as 'Category',p.unitType as 'Unit Type',p.discription as 'Discription',p.current_qty as 'Current Quantity'"
+                        + " FROM drug p "
+                        + "WHERE p.presCode like '%" + text + "%'";
                 p = c.prepareStatement(sp);
                 rs = p.executeQuery();
                 jTable1.setModel(DbUtils.resultSetToTableModel(rs));

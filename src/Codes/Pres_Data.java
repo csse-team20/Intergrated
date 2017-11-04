@@ -115,47 +115,128 @@ public class Pres_Data {
                     + "       )\n"
                     + "       VALUES\n"
                     + "	('" + plabId + "','" + docId + "');";
-               System.out.println("kkkkkkk");
 
                 p = c.prepareStatement(query5);
                 p.execute();
-                System.out.println("llllllllllll");
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
      
-  /*  public void presUpdate(String presId,String ptId,String pDrugs,String pNote,String pdiagId){
+     //Updating 
+     
+    //Updating  preslist
+    public void presUpdate(String presId,String ptId,String pDrugs,String pNote){
         
         c = DBconnection.getConnection();
         
         try {
-                String qry1= "Update preslist set drugs='"+ pDrugs +"', ptId='"+ ptId +"', note='"+pNote+"' where presId='"+ presId +"'";               
+                String qry1= "UPDATE `channeling_center`.`preslist`\n" 
+                            + "SET `presId` = '"+presId+"',\n" 
+                            + " `ptId` = '"+ptId+"',\n" 
+                            + " `presName` = '"+pDrugs+"',\n" 
+                            + " `note` = '"+pNote+"'\n" 
+                            + "WHERE\n" 
+                            + "	(`presId` = '"+presId+"');\n" 
+                            + "";             
                 p = c.prepareStatement(qry1);
                 p.execute();
-                
-//                String qry2= "Update pres_diag set drugs='"+ pDrugs +"',note='"+pNote+"' where presId='"+ presId +"'";               
-//                p = c.prepareStatement(qry2);
-//                p.execute();
 
-                JOptionPane.showMessageDialog(null, "Successfully Updated!");
+                JOptionPane.showMessageDialog(null, "Prescription Information Successfully Updated!");
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, " ERROR! Update Failed!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }      
+    }
+    //Updating pres_diag
+    public void presDiagUpdate(String pdiagId,String presId){
+        
+        c = DBconnection.getConnection();
+        
+        try {
+                String qry1= "UPDATE `channeling_center`.`pres_diag`\n" 
+                             + "SET `dId` = '"+pdiagId+"',\n" 
+                             + " `presId` = '"+presId+"'\n" 
+                             + "WHERE\n" 
+                             + "(`dId` = '"+pdiagId+"')\n" 
+                             + "AND (`presId` = '"+presId+"');\n" 
+                             + "" ;
+              
+                p = c.prepareStatement(qry1);
+                p.execute();
+
+               // JOptionPane.showMessageDialog(null, "Prescription Information Successfully Updated!");
                 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, " ERROR! Update Failed!", "ERROR", JOptionPane.ERROR_MESSAGE);
             }      
     }
     
-     public void labUpdate(String plabId,String docId,String labType){
+    //Updating pres_user
+    public void presUserUpdate(String ppresId,String docID){
         
         c = DBconnection.getConnection();
         
         try {
-                String qry= "Update labs set type='"+ labType +"' where labId='"+ plabId +"'";              
+                String qry1= "UPDATE `channeling_center`.`pres_user`\n" 
+                            + "SET `presId` = '"+ppresId+"',\n" 
+                            + "`ID` = '"+docID+"'\n" 
+                            + "WHERE\n" 
+                            + "	(`presId` = '"+ppresId+"')\n" 
+                            + "AND (`ID` = '"+docID+"');"
+                            + "";
+                
+                p = c.prepareStatement(qry1);
+                p.execute();
+
+             //   JOptionPane.showMessageDialog(null, "Prescription Information Successfully Updated!");
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, " ERROR! Update Failed!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }      
+    }
+    
+    //Update labs
+    public void labUpdate(String plabId,String labType){
+        
+        c = DBconnection.getConnection();
+        
+        try {
+                String qry = "UPDATE `channeling_center`.`labs`\n" 
+                           + "SET `labId` = '"+plabId+"',\n" 
+                           + " `type` = '"+labType+"'\n" 
+                           + "WHERE\n" 
+                           + "	(`labId` = '"+plabId+"');\n" 
+                           + "";              
                 p = c.prepareStatement(qry);
                 p.execute();
 
-                JOptionPane.showMessageDialog(null, "Successfully Updated!");
+                JOptionPane.showMessageDialog(null, "Lab Details Successfully Updated!");
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, " ERROR! Update Failed!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }      
+    } 
+    
+    //Update lab_user
+    public void labUserUpdate(String plabId,String docId){
+        
+        c = DBconnection.getConnection();
+        
+        try {
+                String qry = "UPDATE `channeling_center`.`lab_user`\n" 
+                             + "SET `labId` = '"+plabId+"',\n" 
+                             + " `ID` = '"+docId+"'\n" 
+                             + "WHERE\n" 
+                             + "	(`labId` = '"+plabId+"')\n" 
+                             + "AND (`ID` = '"+docId+"');\n" 
+                             + "";
+                
+                p = c.prepareStatement(qry);
+                p.execute();
+
+              //  JOptionPane.showMessageDialog(null, "Lab Details Successfully Updated!");
                 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, " ERROR! Update Failed!", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -165,4 +246,4 @@ public class Pres_Data {
 
      
      
-     */}
+     

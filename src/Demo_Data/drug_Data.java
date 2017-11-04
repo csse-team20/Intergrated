@@ -18,10 +18,12 @@ public class drug_Data {
     
     public JSONObject AddDrugs() throws JSONException{
     
+        obj.put("tpresCode", "PRES1007");
         obj.put("tpresName", "Amox");
         obj.put("tunitType","tab");
         obj.put("tcatagory", "abc");
         obj.put("tdiscrption","flem");
+        obj.put("tsupId", "SUP1002");
         obj.put("tprice", 1.50);
         
         return obj;
@@ -29,20 +31,14 @@ public class drug_Data {
     
     public JSONObject UpdateDrugs() throws JSONException{
     
-        obj.put("tpresCode", "PRES1007");
+        
         obj.put("tpresName", "testing");
         obj.put("tunitType","testing");
         obj.put("tcatagory", "testing");
         obj.put("tdiscrption","testing");
-        obj.put("tprice", 15.50);
+        obj.put("tsupId", "SUP1002");
         
         return obj;
     }
-    
-    public JSONObject DeleteDrugs() throws JSONException{
-    
-        obj.put("tpresCode", "PRES1007");
-        
-        return obj;
-    }
+   
 }

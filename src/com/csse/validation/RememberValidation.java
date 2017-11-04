@@ -13,23 +13,22 @@ import javax.swing.JTextField;
  * @author Anuradha Sanjeewa
  */
 public class RememberValidation {
-    
-    public void checkRemEmpty(JTextField txtNic,JTextField txtAnswer){
-        
+
+    public void checkRemEmpty(JTextField txtNic, JTextField txtAnswer) {
+
         String nic = txtNic.getText();
         String answer = txtAnswer.getText();
-        if(nic.isEmpty()){
-        
-            JOptionPane.showMessageDialog(txtAnswer,"Nic Should be Entered");
-        
+        if (nic.isEmpty()) {
+
+            JOptionPane.showMessageDialog(txtAnswer, "Nic Should be Entered");
+
         }
-        if(answer.isEmpty()){
-        
-           JOptionPane.showMessageDialog(txtAnswer,"Answer Should be Entered");
-        
+        if (answer.isEmpty()) {
+
+            JOptionPane.showMessageDialog(txtAnswer, "Answer Should be Entered");
+
         }
-    
-    
+
     }
-    
+
 }
